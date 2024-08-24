@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "users#index"
+  post "upload_users", to: "users#upload"
 end
