@@ -1,2 +1,13 @@
-h1 Users#index
-p Find me in app/views/users/index.html.slim
+h1 Upload Users CSV
+
+= form_with url: upload_users_path, local: true, html: { enctype: "multipart/form-data", data: { controller: "file-upload" } } do |f|
+  = f.file_field :file, accept: '.csv'
+  = f.submit "Upload", data: { action: "click->file-upload#submitForm" }
+
+h2 Results
+ul
+  - @results.each do |result|
+    li
+      = result[:name] || "Error"
+      |  -
+      = result[:result]
