@@ -5,4 +5,6 @@ div data-controller="file-upload"
   button type="button" data-action="click->file-upload#submitForm" Upload
 
   h2 Results
+  div style="display: none;" data-file-upload-target="spinner"
+    | Loading...
   ul data-file-upload-target="results"

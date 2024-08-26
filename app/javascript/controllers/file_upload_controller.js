@@ -1,16 +1,19 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["fileInput", "results"]
+  static targets = ["fileInput", "results", "spinner"]
 
   async submitForm(event) {
     event.preventDefault();
+    this.clearResults();
+    this.showSpinner();
 
     const fileInput = this.fileInputTarget;
     const file = fileInput.files[0];
 
     if (!file) {
       this.displayError("Please select a file to upload.");
+      this.hideSpinner();
       return;
     }
 
@@ -20,12 +23,10 @@ export default class extends Controller {
     try {
       const response = await fetch("/upload_users", {
         method: "POST",
-        headers: {
-          "X-CSRF-Token": document.head.querySelector("meta[name=csrf-token]")?.content
-        },
+        headers: { "X-CSRF-Token": document.head.querySelector("meta[name=csrf-token]")?.content },
         body: formData
       });
-
+      this.hideSpinner();
       // Handle the response as JSON
       if (response.ok) {
         const data = await response.json();
@@ -38,8 +39,20 @@ export default class extends Controller {
     }
   }
 
+  clearResults() {
+    this.resultsTarget.innerHTML = "";
+  }
+
+  showSpinner() {
+    this.spinnerTarget.style.display = "block";
+  }
+
+  hideSpinner() {
+    this.spinnerTarget.style.display = "none";
+  }
+
   updateResults(results) {
-    this.resultsTarget.innerHTML = ""; // Clear previous results
+    this.clearResults();
 
     results.forEach(result => {
       const listItem = document.createElement("li");
