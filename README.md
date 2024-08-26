@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version
+  - 3.2.2
 
 * System dependencies
+  - 3.2.2
 
 * Configuration
+  - bundle install
 
 * Database creation
-
-* Database initialization
+  - rails db:create
+  - rails db:migrate
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+  - Run all test suite
+    - bundle exec rspec spec/
+  - Run specific test suit
+    - bundle exec rspec spec/controllers/
+    - bundle exec rspec spec/fixtures/
+    - bundle exec rspec spec/models/
+    - bundle exec rspec spec/services/
 
 * Deployment instructions
+  - git push heroku your-branch-name:main
 
-* ...
