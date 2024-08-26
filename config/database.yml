@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: user_uploader_production
-  username: user_uploader
-  password: <%= ENV["USER_UPLOADER_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

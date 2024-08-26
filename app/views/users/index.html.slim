@@ -1,0 +1,10 @@
+h1 Upload Users CSV
+
+div data-controller="file-upload"
+  input type="file" accept=".csv" data-file-upload-target="fileInput"
+  button type="button" data-action="click->file-upload#submitForm" Upload
+
+  h2 Results
+  div style="display: none;" data-file-upload-target="spinner"
+    | Loading...
+  ul data-file-upload-target="results"
